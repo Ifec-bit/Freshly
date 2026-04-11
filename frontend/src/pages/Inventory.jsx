@@ -61,5 +61,5 @@ const styles = {
   pill: { fontSize: 11, fontWeight: 600, padding: '5px 12px', borderRadius: 20, border: '1.5px solid #D3D1C7', color: '#888780', background: '#f8f7f2', cursor: 'pointer' },
   pillActive: { background: '#E1F5EE', borderColor: '#5DCAA5', color: '#0F6E56' },
   empty: { textAlign: 'center', color: '#888780', fontSize: 13, marginTop: 40 },
-  fab: { position: 'fixed', bottom: 32, right: 'calc(50% - 240px + 16px)', width: 52, height: 52, borderRadius: '50%', background: '#1D9E75', color: '#fff', fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 300 },
+  fab: { position: 'fixed', bottom: 32, right: 16, width: 52, height: 52, borderRadius: '50%', background: '#1D9E75', color: '#fff', fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 300, zIndex: 100 },
 };

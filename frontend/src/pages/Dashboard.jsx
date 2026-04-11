@@ -68,5 +68,5 @@ const styles = {
   sectionH: { fontSize: 14, fontWeight: 700, color: '#1a1a1a' },
   seeAll: { fontSize: 12, color: '#1D9E75', fontWeight: 700, cursor: 'pointer' },
   empty: { textAlign: 'center', color: '#888780', fontSize: 13, marginTop: 40 },
-  fab: { position: 'fixed', bottom: 32, right: 'calc(50% - 240px + 16px)', width: 52, height: 52, borderRadius: '50%', background: '#1D9E75', color: '#fff', fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 300 },
+  fab: { position: 'fixed', bottom: 32, right: 16, width: 52, height: 52, borderRadius: '50%', background: '#1D9E75', color: '#fff', fontSize: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 300, zIndex: 100 },
 };
