@@ -1,33 +1,52 @@
-import axios from 'axios';
 import { supabase } from './supabase';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-
-const getAuthHeader = async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-  return { Authorization: `Bearer ${session?.access_token}` };
+const computeStatus = (expiryDate) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const expiry = new Date(expiryDate);
+  const daysLeft = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+  if (daysLeft < 0)  return 'EXPIRED';
+  if (daysLeft <= 2) return 'URGENT';
+  if (daysLeft <= 7) return 'EXPIRING_SOON';
+  return 'FRESH';
 };
 
 export const getItems = async () => {
-  const headers = await getAuthHeader();
-  const res = await axios.get(`${BASE_URL}/items`, { headers });
-  return res.data;
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data, error } = await supabase
+    .from('food_items')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('expiry_date', { ascending: true });
+  if (error) throw error;
+  return data;
 };
 
 export const addItem = async (item) => {
-  const headers = await getAuthHeader();
-  const res = await axios.post(`${BASE_URL}/items`, item, { headers });
-  return res.data;
+  const { data: { user } } = await supabase.auth.getUser();
+  const status = computeStatus(item.expiry_date);
+  const { data, error } = await supabase
+    .from('food_items')
+    .insert([{ ...item, user_id: user.id, status }])
+    .select();
+  if (error) throw error;
+  return data[0];
 };
 
 export const updateItem = async (id, updates) => {
-  const headers = await getAuthHeader();
-  const res = await axios.put(`${BASE_URL}/items/${id}`, updates, { headers });
-  return res.data;
+  const { data, error } = await supabase
+    .from('food_items')
+    .update(updates)
+    .eq('id', id)
+    .select();
+  if (error) throw error;
+  return data[0];
 };
 
 export const deleteItem = async (id) => {
-  const headers = await getAuthHeader();
-  const res = await axios.delete(`${BASE_URL}/items/${id}`, { headers });
-  return res.data;
+  const { error } = await supabase
+    .from('food_items')
+    .delete()
+    .eq('id', id);
+  if (error) throw error;
 };
