@@ -32,7 +32,7 @@ export default function Login() {
           value={email} onChange={e => setEmail(e.target.value)} />
 
         <label style={styles.label}>Password</label>
-        <input style={styles.input} type="password" placeholder="••••••••"
+        <input style={styles.input} type="password" placeholder="password"
           value={password} onChange={e => setPassword(e.target.value)} />
 
         {error && <p style={styles.error}>{error}</p>}

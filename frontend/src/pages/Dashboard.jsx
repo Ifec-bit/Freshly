@@ -33,7 +33,7 @@ export default function Dashboard() {
           <p style={styles.greeting}>Good morning,</p>
           <h1 style={styles.name}>My Fridge</h1>
         </div>
-        <div style={styles.avatar} onClick={() => navigate('/profile')}>M</div>
+        <div style={styles.avatar} onClick={() => navigate('/profile')}>F</div>
       </div>
 
       <div style={styles.statsRow}>
