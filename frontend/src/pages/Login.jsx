@@ -28,7 +28,7 @@ export default function Login() {
         <p style={styles.logoSub}>Stop wasting food</p>
 
         <label style={styles.label}>Email</label>
-        <input style={styles.input} type="email" placeholder="you@email.com"
+        <input style={styles.input} type="email" placeholder="email address"
           value={email} onChange={e => setEmail(e.target.value)} />
 
         <label style={styles.label}>Password</label>
